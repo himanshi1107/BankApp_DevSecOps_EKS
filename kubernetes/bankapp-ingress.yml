@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: bankapp-ingress
+  namespace: bankapp-namespace
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  # Force HTTPS
+    cert-manager.io/cluster-issuer: letsencrypt-prod  # Use Let's Encrypt
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - a39be6ca8f4ee4691a2a4a7d09bc6aff-1021916082.us-east-1.elb.amazonaws.com
+    secretName: bankapp-tls-secret
+  rules:
+  - host: a39be6ca8f4ee4691a2a4a7d09bc6aff-1021916082.us-east-1.elb.amazonaws.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: bankapp-service
+            port:
+              number: 8080
