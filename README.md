@@ -36,11 +36,7 @@ This project demonstrates **end-to-end automation** for deploying a **secure, sc
 
 Below is the high-level architecture of the project:  
 
-Developer → GitHub → Jenkins CI → SonarQube + OWASP + Trivy → DockerHub
-↓
-ArgoCD → AWS EKS (Kubernetes + Helm)
-↓
-Prometheus + Grafana → Observability & Monitoring
+   <img width="1200" height="674" alt="Screenshot 2025-09-18 213408" src="https://github.com/user-attachments/assets/5e82a75f-10df-428d-b4da-33f3c81bd1a4" /><br>
 
 - **CI/CD**: Jenkins automates build, test, scan, and image push.  
 - **Security**: OWASP, SonarQube, and Trivy ensure code and container security.  
